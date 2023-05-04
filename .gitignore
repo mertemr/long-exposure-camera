@@ -1,0 +1,5 @@
+images/
+*.[jJ][pP][gG]*
+venv/
+*.pyc
+.vscode/
