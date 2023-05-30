@@ -20,6 +20,14 @@ parser.add_argument("-o", "--output", help="Output file name (default: output.pn
 # parser.add_argument("-f", "--fps", type=int, help="FPS (default: auto)", default=None)
 args = parser.parse_args()
 
+cam = cv2.VideoCapture(int(args.camera_id))
+
+w,h = map(int, args.size.split("x"))
+
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, w)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
+cam.set(cv2.CAP_PROP_ISO_SPEED, 50)
+
 def frame() -> numpy.ndarray:
     _, frame = cam.read()
     return frame
@@ -187,13 +195,5 @@ def main():
     cv2.destroyAllWindows()
     sys.exit()
 
-if __name__ == "__main__":    
-    cam = cv2.VideoCapture(int(args.camera_id))
-    
-    w,h = map(int, args.size.split("x"))
-    
-    cam.set(cv2.CAP_PROP_FRAME_WIDTH, w)
-    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
-    cam.set(cv2.CAP_PROP_ISO_SPEED, 50)
-    
+if __name__ == "__main__":
     main()
